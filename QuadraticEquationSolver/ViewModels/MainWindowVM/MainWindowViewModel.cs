@@ -3,6 +3,7 @@ using QuadraticEquationSolver.Model;
 using QuadraticEquationSolver.Model.AppSettings.AppConfig;
 using QuadraticEquationSolver.Service.UserDialogService;
 using QuadraticEquationSolver.ViewModels.Base;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 
@@ -57,8 +58,10 @@ namespace QuadraticEquationSolver.ViewModels.MainWindowVm
             get => _title;
             set
             {
-                if(Set(ref _title, value, title => !string.IsNullOrWhiteSpace(title)))
-                    OnPropertyChanged(nameof(TitleLength));
+                //SetValue(ref _title, value)
+                //    .UpdateProperty(nameof(TitleLength))
+                //    .Then(v=> Debug.WriteLine("Установлен заголовок окна {0}", v))
+                //    .ThenIf(v => !string.IsNullOrEmpty(v), v => Debug.WriteLine("Не пустое значение загловка окна"));
             }
         }
 
@@ -68,11 +71,7 @@ namespace QuadraticEquationSolver.ViewModels.MainWindowVm
 
         #region User name
 
-        public string UserName
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
+        public string UserName { get => Get<string>(); set => Set(value); }
 
         #endregion
 
