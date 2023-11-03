@@ -8,11 +8,39 @@
         DataContext="{Binding MainWindowViewModel, Source={StaticResource Locator}}"
         Title="{Binding Title}" Height="450" Width="800">
     <Grid>
-        <StackPanel Margin="20">
+        <!--<StackPanel Margin="20">
             <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Text="{Binding TitleLength, StringFormat=Длина заголовка {0} символов}"/>
             <TextBox Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="{Binding UserName, StringFormat=Имя пользователя: {0}}"/>
+        </StackPanel>-->
+        <StackPanel Margin="20">
+            <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, ValidatesOnDataErrors=True}" />
+            <TextBlock Text="{Binding TitleLength, StringFormat=Длина заголовка {0} символов}"/>
+
+            <TextBlock>
+                a <Run FontWeight="Bold">x</Run><Run BaselineAlignment="Superscript" FontSize="8">2</Run> 
+                + b <Run FontWeight="Bold">x</Run> + c = 0
+            </TextBlock>
+            <UniformGrid Columns="3" Margin="0,5">
+                <DockPanel Margin="0,0,10,0">
+                    <TextBlock Text="a = "/>
+                    <TextBox Text="{Binding A}"/>
+                </DockPanel>
+                <DockPanel Margin="10,0">
+                    <TextBlock Text="b = "/>
+                    <TextBox Text="{Binding B}"/>
+                </DockPanel>
+                <DockPanel Margin="10,0,0,0">
+                    <TextBlock Text="c = "/>
+                    <TextBox Text="{Binding C}"/>
+                </DockPanel>
+            </UniformGrid>
+            <UniformGrid Columns="2" Margin="0,10">
+                <TextBlock Text="{Binding  X1, StringFormat='X1 = {0}', FallbackValue=[--]}"/>
+                <TextBlock Text="{Binding  X2, StringFormat='X2 = {0}', FallbackValue=[--]}"/>
+            </UniformGrid>
         </StackPanel>
+        
     </Grid>
 </Window>

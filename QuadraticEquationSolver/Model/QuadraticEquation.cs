@@ -5,36 +5,33 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace QuadraticEquationSolver.Model;
-
+/// <summary>
+/// Квадратное уравнение y = A*x^2 + B*x + C
+/// Корни уравнения y(x) = (x - x1) * (x - x2)
+/// </summary>
 internal class QuadraticEquation
 {
     public double A { get; set; }
     public double B { get; set; }
     public double C { get; set; }
 
-    public QuadraticEquation(double a, double b, double c)
+    public QuadraticEquation()
     {
-        A = a;
-        B = b;
-        C = c;
+        
     }
 
-    public double Discriminant()
-    {
-        return B * B - 4 * A * C;
-    }
+    public double Discriminant => B * B - 4 * A * C;
 
-    public double? X1()
+    public int RootsCount => Discriminant switch
     {
-        if (Discriminant() < 0)
-            return null;
-        return (-B + Math.Sqrt(Discriminant())) / (2 * A);
-    }
+        >0 => 2,
+        0 => 1,
+        _ => 0
+    };
 
-    public double? X2()
-    {
-        if (Discriminant() < 0)
-            return null;
-        return (-B - Math.Sqrt(Discriminant())) / (2 * A);
-    }   
+    public double X1 => RootsCount == 0 ? double.NaN : (-B + Math.Sqrt(Discriminant)) / (2 * A);
+
+    public double X2 => RootsCount == 0 ? double.NaN : (-B - Math.Sqrt(Discriminant)) / (2 * A);
+    
+
 }

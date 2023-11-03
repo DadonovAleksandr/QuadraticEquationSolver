@@ -12,6 +12,8 @@ namespace QuadraticEquationSolver.ViewModels.MainWindowVm
     {
         private readonly IAppConfig _appConfig;
         private readonly IUserDialogService _userDialogService;
+        private QuadraticEquation _quadraticEquation = new();
+
         /* ------------------------------------------------------------------------------------------------------------ */
         public MainWindowViewModel(IUserDialogService userDialogService)
         {
@@ -55,7 +57,7 @@ namespace QuadraticEquationSolver.ViewModels.MainWindowVm
             get => _title;
             set
             {
-                if(Set(ref _title, value))
+                if(Set(ref _title, value, title => !string.IsNullOrWhiteSpace(title)))
                     OnPropertyChanged(nameof(TitleLength));
             }
         }
@@ -73,6 +75,47 @@ namespace QuadraticEquationSolver.ViewModels.MainWindowVm
         }
 
         #endregion
+
+        public double A
+        {
+            get => _quadraticEquation.A;
+            set
+            {
+                if(!Set(value, _quadraticEquation.A, v => _quadraticEquation.A = v)) 
+                     return;
+                OnPropertyChanged(nameof(X1));
+                OnPropertyChanged(nameof(X2));
+            }
+        }
+        public double B 
+        { 
+            get => _quadraticEquation.B;
+            set
+            {
+                if (!Set(value, _quadraticEquation.B, v => _quadraticEquation.B = v)) 
+                    return;
+                OnPropertyChanged(nameof(X1));
+                OnPropertyChanged(nameof(X2));
+            }
+        }
+        
+        public double C 
+        { 
+            get => _quadraticEquation.C;
+            set
+            {
+                if (!Set(value, _quadraticEquation.C, v => _quadraticEquation.C = v))
+                    return;
+                OnPropertyChanged(nameof(X1));
+                OnPropertyChanged(nameof(X2));
+            }
+        
+        }
+
+
+        public double X1 => _quadraticEquation.X1;
+        public double X2 => _quadraticEquation.X2;
+
 
     }
 }
